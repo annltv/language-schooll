@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language School</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<nav>
+    <div class="logo">Language School</div>
+
+    <ul>
+        <li><a href="#hero">Главная</a></li>
+        <li><a href="#courses">Курсы</a></li>
+        <li><a href="#teachers">Преподаватели</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+    </ul>
+</nav>
+
+
+
+    <div class="hero" id="hero">
+
+    <div class="hero-overlay">
+
+        <h1>Language School</h1>
+
+        <p>Изучайте языки легко и с удовольствием</p>
+
+        <button>Записаться на курс</button>
+
+    </div>
+
+</div>
+
+    <section class="courses" id="courses"></section>
+        <h2>Наши курсы</h2>
+        <div class="courses-container">
+
+    <div class="course">
+        <h3>🇬🇧 Английский</h3>
+        <p>Для начинающих и продвинутых</p>
+    </div>
+
+    <div class="course">
+        <h3>🇨🇳 Китайский</h3>
+        <p>С нуля до уверенного общения</p>
+    </div>
+
+    <div class="course">
+        <h3>🇪🇸 Испанский</h3>
+        <p>Разговорная практика и грамматика</p>
+    </div>
+<section id="teachers">
+    <h2>Преподаватели</h2>
+    <p>Здесь скоро будут наши учителя 😊</p>
+</section>
+</div>
+
+    </section>
+<section id="contacts" class="form-section">
+
+    <h2>Записаться на курс</h2>
+
+    <form>
+
+        <input type="text" placeholder="Ваше имя">
+
+        <input type="text" placeholder="Телефон">
+
+        <select>
+            <option>Выберите язык</option>
+            <option>Английский</option>
+            <option>Китайский</option>
+            <option>Испанский</option>
+        </select>
+
+        <button type="submit">Отправить заявку</button>
+
+    </form>
+
+</section>
+
+<div id="toast" class="toast">
+    ✓ Заявка отправлена
+</div>
+
+<script>
+function showToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+}
+
+// форма
+document.querySelector("form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    this.reset(); // очистка формы
+
+    showToast(); // показать уведомление
+});
+</script>
+
+</body>
+</html>
