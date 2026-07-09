@@ -5,109 +5,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Language School</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<nav>
-    <div class="logo">Language School</div>
+    <!-- Навигация -->
+    <nav>
+        <div class="logo">🌍 Language School</div>
+        <ul>
+            <li><a href="#hero">Главная</a></li>
+            <li><a href="#courses">Курсы</a></li>
+            <li><a href="#teachers">Преподаватели</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+        </ul>
+        <button id="themeToggle" class="theme-btn">🌙</button>
+    </nav>
 
-    <ul>
-        <li><a href="#hero">Главная</a></li>
-        <li><a href="#courses">Курсы</a></li>
-        <li><a href="#teachers">Преподаватели</a></li>
-        <li><a href="#contacts">Контакты</a></li>
-    </ul>
-</nav>
-
-
-
+    <!-- Герой-секция -->
     <div class="hero" id="hero">
-
-    <div class="hero-overlay">
-
-        <h1>Language School</h1>
-
-        <p>Изучайте языки легко и с удовольствием</p>
-
-        <button>Записаться на курс</button>
-
+        <div class="hero-overlay">
+            <h1>Language School</h1>
+            <p>Изучайте языки легко и с удовольствием</p>
+            <button onclick="document.getElementById('contacts').scrollIntoView({behavior: 'smooth'})">
+                Записаться на курс
+            </button>
+        </div>
     </div>
-
-</div>
-
-    <section class="courses" id="courses"></section>
+<section class="countdown">
+    <h2>🎯 Ближайший старт курсов</h2>
+    <div class="countdown-container">
+        <div class="countdown-item">
+            <span id="days">00</span>
+            <p>Дней</p>
+        </div>
+        <div class="countdown-item">
+            <span id="hours">00</span>
+            <p>Часов</p>
+        </div>
+        <div class="countdown-item">
+            <span id="minutes">00</span>
+            <p>Минут</p>
+        </div>
+        <div class="countdown-item">
+            <span id="seconds">00</span>
+            <p>Секунд</p>
+        </div>
+    </div>
+</section>
+    <!-- Курсы -->
+    <section class="courses" id="courses">
         <h2>Наши курсы</h2>
         <div class="courses-container">
-
-    <div class="course">
-        <h3>🇬🇧 Английский</h3>
-        <p>Для начинающих и продвинутых</p>
-    </div>
-
-    <div class="course">
-        <h3>🇨🇳 Китайский</h3>
-        <p>С нуля до уверенного общения</p>
-    </div>
-
-    <div class="course">
-        <h3>🇪🇸 Испанский</h3>
-        <p>Разговорная практика и грамматика</p>
-    </div>
-<section id="teachers">
-    <h2>Преподаватели</h2>
-    <p>Здесь скоро будут наши учителя 😊</p>
-</section>
-</div>
-
+            <div class="course">
+                <h3>🇬🇧 Английский</h3>
+                <p>Для начинающих и продвинутых</p>
+                <span class="course-level">Уровни: A1-C2</span>
+            </div>
+            <div class="course">
+                <h3>🇨🇳 Китайский</h3>
+                <p>С нуля до уверенного общения</p>
+                <span class="course-level">Уровни: HSK 1-4</span>
+            </div>
+            <div class="course">
+                <h3>🇪🇸 Испанский</h3>
+                <p>Разговорная практика и грамматика</p>
+                <span class="course-level">Уровни: A1-B2</span>
+            </div>
+        </div>
     </section>
-<section id="contacts" class="form-section">
-
-    <h2>Записаться на курс</h2>
-
-    <form>
-
-        <input type="text" placeholder="Ваше имя">
-
-        <input type="text" placeholder="Телефон">
-
-        <select>
-            <option>Выберите язык</option>
-            <option>Английский</option>
-            <option>Китайский</option>
-            <option>Испанский</option>
+<section class="calculator" id="calculator">
+    <h2>💰 Рассчитайте стоимость курса</h2>
+    <div class="calculator-container">
+        <select id="languageSelect">
+            <option value="5000">Английский - 5000₽</option>
+            <option value="6000">Китайский - 6000₽</option>
+            <option value="5500">Испанский - 5500₽</option>
         </select>
-
-        <button type="submit">Отправить заявку</button>
-
-    </form>
-
+        
+        <select id="levelSelect">
+            <option value="1">Начальный</option>
+            <option value="1.2">Средний (+20%)</option>
+            <option value="1.5">Продвинутый (+50%)</option>
+        </select>
+        
+        <div class="price-result">
+            <p>Стоимость: <span id="priceDisplay">5000</span> ₽</p>
+        </div>
+    </div>
 </section>
+    <!-- Преподаватели (исправлено - теперь отдельная секция) -->
+    <section id="teachers" class="teachers">
+        <h2>Наши преподаватели</h2>
+        <div class="teachers-container">
+            <div class="teacher-card">
+                <div class="teacher-avatar">👩‍🏫</div>
+                <h3>Анна Иванова</h3>
+                <p>Английский язык</p>
+                <span class="teacher-experience">Опыт: 8 лет</span>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar">👨‍🏫</div>
+                <h3>Михаил Чжан</h3>
+                <p>Китайский язык</p>
+                <span class="teacher-experience">Опыт: 6 лет</span>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar">👩‍🏫</div>
+                <h3>Мария Гарсия</h3>
+                <p>Испанский язык</p>
+                <span class="teacher-experience">Опыт: 5 лет</span>
+            </div>
+        </div>
+    </section>
 
-<div id="toast" class="toast">
-    ✓ Заявка отправлена
-</div>
+    <!-- Форма записи -->
+    <section id="contacts" class="form-section">
+        <h2>Записаться на курс</h2>
+        <form id="contactForm">
+            <input type="text" placeholder="Ваше имя" required>
+            <input type="tel" placeholder="Телефон" required>
+            <select required>
+                <option value="">Выберите язык</option>
+                <option>Английский</option>
+                <option>Китайский</option>
+                <option>Испанский</option>
+            </select>
+            <button type="submit">Отправить заявку</button>
+        </form>
+    </section>
 
-<script>
-function showToast() {
-    const toast = document.getElementById("toast");
-    toast.classList.add("show");
+    <!-- Попап (уведомление) -->
+    <div id="toast" class="toast">
+        ✓ Заявка отправлена!
+    </div>
 
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 2500);
-}
-
-// форма
-document.querySelector("form").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    this.reset(); // очистка формы
-
-    showToast(); // показать уведомление
-});
-</script>
-
+    <script src="script.js"></script>
 </body>
+
 </html>
