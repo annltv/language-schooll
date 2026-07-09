@@ -5,23 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Language School</title>
+    
+    <!-- ===== FAVICON ===== -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <!-- Навигация -->
+    <!-- ===== НАВИГАЦИЯ ===== -->
     <nav>
         <div class="logo">🌍 Language School</div>
         <ul>
             <li><a href="#hero">Главная</a></li>
             <li><a href="#courses">Курсы</a></li>
             <li><a href="#teachers">Преподаватели</a></li>
+            <li><a href="#level-test">Тест</a></li>
+            <li><a href="#map-students">Студенты</a></li>
+            <li><a href="#reviews">Отзывы</a></li>
             <li><a href="#contacts">Контакты</a></li>
         </ul>
         <button id="themeToggle" class="theme-btn">🌙</button>
     </nav>
 
-    <!-- Герой-секция -->
+    <!-- ===== ГЕРОЙ-СЕКЦИЯ ===== -->
     <div class="hero" id="hero">
         <div class="hero-overlay">
             <h1>Language School</h1>
@@ -31,28 +43,31 @@
             </button>
         </div>
     </div>
-<section class="countdown">
-    <h2>🎯 Ближайший старт курсов</h2>
-    <div class="countdown-container">
-        <div class="countdown-item">
-            <span id="days">00</span>
-            <p>Дней</p>
+
+    <!-- ===== ОБРАТНЫЙ ОТСЧЕТ ===== -->
+    <section class="countdown">
+        <h2>🎯 Ближайший старт курсов</h2>
+        <div class="countdown-container">
+            <div class="countdown-item">
+                <span id="days">00</span>
+                <p>Дней</p>
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span>
+                <p>Часов</p>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span>
+                <p>Минут</p>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span>
+                <p>Секунд</p>
+            </div>
         </div>
-        <div class="countdown-item">
-            <span id="hours">00</span>
-            <p>Часов</p>
-        </div>
-        <div class="countdown-item">
-            <span id="minutes">00</span>
-            <p>Минут</p>
-        </div>
-        <div class="countdown-item">
-            <span id="seconds">00</span>
-            <p>Секунд</p>
-        </div>
-    </div>
-</section>
-    <!-- Курсы -->
+    </section>
+
+    <!-- ===== КУРСЫ ===== -->
     <section class="courses" id="courses">
         <h2>Наши курсы</h2>
         <div class="courses-container">
@@ -73,27 +88,69 @@
             </div>
         </div>
     </section>
-<section class="calculator" id="calculator">
-    <h2>💰 Рассчитайте стоимость курса</h2>
-    <div class="calculator-container">
-        <select id="languageSelect">
-            <option value="5000">Английский - 5000₽</option>
-            <option value="6000">Китайский - 6000₽</option>
-            <option value="5500">Испанский - 5500₽</option>
-        </select>
-        
-        <select id="levelSelect">
-            <option value="1">Начальный</option>
-            <option value="1.2">Средний (+20%)</option>
-            <option value="1.5">Продвинутый (+50%)</option>
-        </select>
-        
-        <div class="price-result">
-            <p>Стоимость: <span id="priceDisplay">5000</span> ₽</p>
+
+    <!-- ===== ТЕСТ НА УРОВЕНЬ ===== -->
+    <section class="level-test" id="level-test">
+        <h2>🎯 Определите свой уровень</h2>
+        <p class="test-subtitle">Тест поможет определить ваш примерный уровень, чтобы подобрать подходящий для вас курс</p>
+        <div class="test-container" id="testContainer">
+            <div id="testContent">
+                <!-- Вопросы генерируются через JavaScript -->
+            </div>
         </div>
-    </div>
-</section>
-    <!-- Преподаватели (исправлено - теперь отдельная секция) -->
+    </section>
+
+    <!-- ===== КАРТА СТУДЕНТОВ ===== -->
+    <section class="map-students" id="map-students">
+        <h2>🌍 Наши студенты по всему миру</h2>
+        <p class="map-subtitle">Присоединяйтесь к нашему международному сообществу!</p>
+        <div class="map-container">
+            <div class="country-card">
+                <span class="country-flag">🇺🇸</span>
+                <span class="country-name">США</span>
+                <span class="student-count">12 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 60%;"></div></div>
+            </div>
+            <div class="country-card">
+                <span class="country-flag">🇬🇧</span>
+                <span class="country-name">Великобритания</span>
+                <span class="student-count">8 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 40%;"></div></div>
+            </div>
+            <div class="country-card">
+                <span class="country-flag">🇨🇳</span>
+                <span class="country-name">Китай</span>
+                <span class="student-count">15 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 75%;"></div></div>
+            </div>
+            <div class="country-card">
+                <span class="country-flag">🇪🇸</span>
+                <span class="country-name">Испания</span>
+                <span class="student-count">9 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 45%;"></div></div>
+            </div>
+            <div class="country-card">
+                <span class="country-flag">🇷🇺</span>
+                <span class="country-name">Россия</span>
+                <span class="student-count">20 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 100%;"></div></div>
+            </div>
+            <div class="country-card">
+                <span class="country-flag">🇫🇷</span>
+                <span class="country-name">Франция</span>
+                <span class="student-count">7 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 35%;"></div></div>
+            </div>
+            <div class="country-card total-students">
+                <span class="country-flag">🌟</span>
+                <span class="country-name">Всего студентов</span>
+                <span class="student-count" id="totalStudents">71</span>
+                <div class="country-bar"><div class="country-fill" style="width: 100%; background: linear-gradient(90deg, #ffd700, #ff6b6b);"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПРЕПОДАВАТЕЛИ ===== -->
     <section id="teachers" class="teachers">
         <h2>Наши преподаватели</h2>
         <div class="teachers-container">
@@ -117,68 +174,8 @@
             </div>
         </div>
     </section>
-        <!-- ===== ТЕСТ НА УРОВЕНЬ ===== -->
-    <section class="level-test" id="level-test">
-        <h2>🎯 Определите свой уровень</h2>
-        <p class="test-subtitle">Тест поможет определить ваш примерный уровень, чтобы подобрать подходящий для вас курс</p>
-        <div class="test-container" id="testContainer">
-            <div id="testContent">
-                <!-- Вопросы будут генерироваться через JavaScript -->
-            </div>
-        </div>
-    </section>
 
-    <!-- ===== КАРТА СТУДЕНТОВ ===== -->
-    <section class="map-students" id="map-students">
-        <h2>🌍 Наши студенты по всему миру</h2>
-        <p class="map-subtitle">Присоединяйтесь к нашему международному сообществу!</p>
-        <div class="map-container">
-            <div class="country-card" data-count="12">
-                <span class="country-flag">🇺🇸</span>
-                <span class="country-name">США</span>
-                <span class="student-count">12 студентов</span>
-                <div class="country-bar"><div class="country-fill" style="width: 60%;"></div></div>
-            </div>
-            <div class="country-card" data-count="8">
-                <span class="country-flag">🇬🇧</span>
-                <span class="country-name">Великобритания</span>
-                <span class="student-count">8 студентов</span>
-                <div class="country-bar"><div class="country-fill" style="width: 40%;"></div></div>
-            </div>
-            <div class="country-card" data-count="15">
-                <span class="country-flag">🇨🇳</span>
-                <span class="country-name">Китай</span>
-                <span class="student-count">15 студентов</span>
-                <div class="country-bar"><div class="country-fill" style="width: 75%;"></div></div>
-            </div>
-            <div class="country-card" data-count="9">
-                <span class="country-flag">🇪🇸</span>
-                <span class="country-name">Испания</span>
-                <span class="student-count">9 студентов</span>
-                <div class="country-bar"><div class="country-fill" style="width: 45%;"></div></div>
-            </div>
-            <div class="country-card" data-count="20">
-                <span class="country-flag">🇷🇺</span>
-                <span class="country-name">Россия</span>
-                <span class="student-count">20 студентов</span>
-                <div class="country-bar"><div class="country-fill" style="width: 100%;"></div></div>
-            </div>
-            <div class="country-card" data-count="7">
-                <span class="country-flag">🇫🇷</span>
-                <span class="country-name">Франция</span>
-                <span class="student-count">7 студентов</span>
-                <div class="country-bar"><div class="country-fill" style="width: 35%;"></div></div>
-            </div>
-            <div class="country-card total-students">
-                <span class="country-flag">🌟</span>
-                <span class="country-name">Всего студентов</span>
-                <span class="student-count" id="totalStudents">71</span>
-                <div class="country-bar"><div class="country-fill" style="width: 100%; background: linear-gradient(90deg, #ffd700, #ff6b6b);"></div></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== ОТЗЫВЫ СТУДЕНТОВ ===== -->
+    <!-- ===== ОТЗЫВЫ ===== -->
     <section class="reviews" id="reviews">
         <h2>💬 Отзывы наших студентов</h2>
         <p class="reviews-subtitle">Реальные истории успеха наших учеников</p>
@@ -235,9 +232,10 @@
                 <span class="review-date">1 июня 2026</span>
             </div>
         </div>
-        <button class="reviews-showmore" onclick="showMoreReviews()">Показать еще отзывы</button>
+        <button class="reviews-showmore" id="showMoreBtn">Показать еще отзывы</button>
     </section>
-    <!-- Форма записи -->
+
+    <!-- ===== ФОРМА ЗАПИСИ ===== -->
     <section id="contacts" class="form-section">
         <h2>Записаться на курс</h2>
         <form id="contactForm">
@@ -253,7 +251,7 @@
         </form>
     </section>
 
-    <!-- Попап (уведомление) -->
+    <!-- ===== TOAST УВЕДОМЛЕНИЕ ===== -->
     <div id="toast" class="toast">
         ✓ Заявка отправлена!
     </div>
