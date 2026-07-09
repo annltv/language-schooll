@@ -912,3 +912,91 @@ body.dark-theme select {
         font-size: 24px;
     }
 }
+/* ===== ПРОГРЕСС-БАР В ТЕСТЕ ===== */
+.progress-bar-full {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4a90e2, #764ba2);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+/* ===== СТАТИСТИКА В РЕЗУЛЬТАТЕ ===== */
+.result-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 15px 0;
+    font-size: 16px;
+}
+
+.stat-correct {
+    color: #4ade80;
+}
+
+.stat-wrong {
+    color: #f87171;
+}
+
+.result-percent {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 10px 0 20px;
+}
+
+.test-consult-btn {
+    display: inline-block;
+    padding: 14px 35px;
+    background: linear-gradient(135deg, #4a90e2, #764ba2);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-left: 10px;
+}
+
+.test-consult-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(74, 144, 226, 0.3);
+}
+
+.option-letter {
+    font-weight: bold;
+    margin-right: 10px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== АДАПТИВНОСТЬ ДЛЯ ТЕСТА ===== */
+@media (max-width: 600px) {
+    .result-stats {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .test-consult-btn {
+        display: block;
+        margin: 10px auto 0;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .test-option {
+        font-size: 14px;
+        padding: 12px 16px;
+    }
+    
+    .question-text {
+        font-size: 16px;
+    }
+}
