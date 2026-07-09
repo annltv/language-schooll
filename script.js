@@ -109,101 +109,249 @@ function startCountdown() {
     }, 1000);
 }
 startCountdown();
-// ===== ТЕСТ НА УРОВЕНЬ =====
-let currentQuestion = 1;
-let correctAnswers = 0;
+// ===== ТЕСТ НА УРОВЕНЬ (15 вопросов) =====
+const testQuestions = [
+    {
+        question: 'Выберите правильное слово: "I ____ to school every day."',
+        options: ['go', 'goes', 'going', 'went'],
+        correct: 0
+    },
+    {
+        question: 'Как переводится "Hello"?',
+        options: ['Привет', 'Пока', 'Спасибо', 'Доброе утро'],
+        correct: 0
+    },
+    {
+        question: 'Выберите правильный перевод: "She is a teacher."',
+        options: ['Он учитель', 'Она учительница', 'Они учителя', 'Мы учителя'],
+        correct: 1
+    },
+    {
+        question: 'Что означает "Благодарю" по-английски?',
+        options: ['Please', 'Sorry', 'Thank you', 'Goodbye'],
+        correct: 2
+    },
+    {
+        question: 'Выберите правильный вариант: "We ____ playing football now."',
+        options: ['am', 'is', 'are', 'be'],
+        correct: 2
+    },
+    {
+        question: 'Как сказать "Я люблю музыку" по-английски?',
+        options: ['I love music', 'I like music', 'I enjoy music', 'I want music'],
+        correct: 0
+    },
+    {
+        question: 'Что означает слово "Beautiful"?',
+        options: ['Уродливый', 'Красивый', 'Большой', 'Маленький'],
+        correct: 1
+    },
+    {
+        question: 'Выберите правильный артикль: "____ apple"',
+        options: ['a', 'an', 'the', 'none'],
+        correct: 1
+    },
+    {
+        question: 'Как переводится "Thank you very much"?',
+        options: ['Пожалуйста', 'Большое спасибо', 'Извините', 'Добрый день'],
+        correct: 1
+    },
+    {
+        question: 'Выберите правильную форму: "They ____ to the park yesterday."',
+        options: ['go', 'goes', 'went', 'going'],
+        correct: 2
+    },
+    {
+        question: 'Что означает "До свидания" по-английски?',
+        options: ['Hello', 'Goodbye', 'Sorry', 'Please'],
+        correct: 1
+    },
+    {
+        question: 'Как спросить "Как дела?" по-английски?',
+        options: ['How are you?', 'What is your name?', 'Where are you?', 'How old are you?'],
+        correct: 0
+    },
+    {
+        question: 'Выберите правильный вариант: "She ____ a student."',
+        options: ['am', 'is', 'are', 'be'],
+        correct: 1
+    },
+    {
+        question: 'Что означает слово "Friend"?',
+        options: ['Враг', 'Друг', 'Семья', 'Коллега'],
+        correct: 1
+    },
+    {
+        question: 'Как переводится "I am happy"?',
+        options: ['Я грустный', 'Я счастливый', 'Я устал', 'Я голоден'],
+        correct: 1
+    }
+];
+
+let currentQuestionIndex = 0;
+let userAnswers = [];
 let testStarted = false;
 
-// Обработка ответов на тест
-document.querySelectorAll('.test-option').forEach(button => {
-    button.addEventListener('click', function() {
-        if (this.disabled || testStarted) return;
-        
-        const isCorrect = this.dataset.correct === 'true';
-        const allOptions = this.parentElement.querySelectorAll('.test-option');
-        
-        // Блокируем все кнопки в текущем вопросе
-        allOptions.forEach(opt => {
-            opt.disabled = true;
-            if (opt.dataset.correct === 'true') {
-                opt.classList.add('correct');
-            } else if (opt === this && !isCorrect) {
-                opt.classList.add('wrong');
-            }
-        });
-        
-        if (isCorrect) correctAnswers++;
-        
-        // Переход к следующему вопросу
-        setTimeout(() => {
-            const current = document.getElementById(`question${currentQuestion}`);
-            current.style.display = 'none';
-            currentQuestion++;
-            
-            if (currentQuestion <= 5) {
-                document.getElementById(`question${currentQuestion}`).style.display = 'block';
-                // Обновляем прогресс
-                const progress = document.querySelector(`#question${currentQuestion} .question-progress`);
-                if (progress) {
-                    progress.textContent = `${(currentQuestion - 1) * 20}%`;
-                }
-            } else {
-                showTestResult();
-            }
-        }, 800);
-    });
-});
-
-function showTestResult() {
-    const resultDiv = document.getElementById('testResult');
-    resultDiv.style.display = 'block';
+// Функция для отображения вопроса
+function renderQuestion(index) {
+    const container = document.getElementById('testContent');
+    const question = testQuestions[index];
+    const total = testQuestions.length;
+    const progress = Math.round(((index + 1) / total) * 100);
     
-    let level, detail;
-    switch(correctAnswers) {
-        case 5:
-            level = '🌟 Продвинутый (C1-C2)';
-            detail = 'Вы отлично владеете языком! Рекомендуем курсы для продвинутых.';
-            break;
-        case 4:
-            level = '📚 Средне-продвинутый (B2)';
-            detail = 'Хороший результат! Предлагаем курсы B2 для дальнейшего развития.';
-            break;
-        case 3:
-            level = '📖 Средний (B1)';
-            detail = 'Неплохо! Рекомендуем курсы B1 для укрепления знаний.';
-            break;
-        case 2:
-            level = '📗 Начально-средний (A2)';
-            detail = 'Вы уже знаете основы! Курсы A2 помогут улучшить навыки.';
-            break;
-        default:
-            level = '📘 Начальный (A1)';
-            detail = 'Все начинается с первого шага! Приглашаем на курсы A1.';
+    let html = `
+        <div class="test-question" id="question${index + 1}">
+            <div class="question-header">
+                <span class="question-number">Вопрос ${index + 1} из ${total}</span>
+                <span class="question-progress">${progress}%</span>
+            </div>
+            <div class="progress-bar-full">
+                <div class="progress-bar-fill" style="width: ${progress}%;"></div>
+            </div>
+            <h3>${question.question}</h3>
+            <div class="test-options">
+    `;
+    
+    question.options.forEach((option, optIndex) => {
+        const letter = String.fromCharCode(65 + optIndex); // A, B, C, D
+        html += `
+            <button class="test-option" data-question="${index}" data-option="${optIndex}" data-correct="${optIndex === question.correct ? 'true' : 'false'}">
+                <span class="option-letter">${letter}.</span> ${option}
+            </button>
+        `;
+    });
+    
+    html += `
+            </div>
+        </div>
+    `;
+    
+    container.innerHTML = html;
+    
+    // Добавляем обработчики на кнопки
+    document.querySelectorAll('.test-option').forEach(btn => {
+        btn.addEventListener('click', function() {
+            handleAnswer(this);
+        });
+    });
+    
+    // Обновляем прогресс
+    updateProgress(index);
+}
+
+// Обработка ответа
+function handleAnswer(button) {
+    if (button.disabled) return;
+    
+    const questionIndex = parseInt(button.dataset.question);
+    const selectedOption = parseInt(button.dataset.option);
+    const isCorrect = button.dataset.correct === 'true';
+    
+    // Сохраняем ответ
+    userAnswers[questionIndex] = selectedOption;
+    
+    // Блокируем все кнопки в текущем вопросе
+    const allOptions = button.parentElement.querySelectorAll('.test-option');
+    allOptions.forEach(opt => {
+        opt.disabled = true;
+        if (opt.dataset.correct === 'true') {
+            opt.classList.add('correct');
+        } else if (opt === button && !isCorrect) {
+            opt.classList.add('wrong');
+        }
+    });
+    
+    // Переход к следующему вопросу или показ результата
+    setTimeout(() => {
+        const nextIndex = questionIndex + 1;
+        if (nextIndex < testQuestions.length) {
+            renderQuestion(nextIndex);
+        } else {
+            showResult();
+        }
+    }, 800);
+}
+
+// Обновление прогресса
+function updateProgress(index) {
+    const total = testQuestions.length;
+    const progress = Math.round(((index + 1) / total) * 100);
+    const progressFill = document.querySelector('.progress-bar-fill');
+    if (progressFill) {
+        progressFill.style.width = progress + '%';
+    }
+}
+
+// Показать результат
+function showResult() {
+    const container = document.getElementById('testContent');
+    const correctCount = userAnswers.reduce((count, answer, index) => {
+        return count + (answer === testQuestions[index].correct ? 1 : 0);
+    }, 0);
+    
+    let level, detail, icon;
+    const percent = (correctCount / testQuestions.length) * 100;
+    
+    if (percent >= 90) {
+        level = '🌟 Продвинутый (C1-C2)';
+        detail = 'Вы отлично владеете языком! Рекомендуем курсы для продвинутых.';
+        icon = '🏆';
+    } else if (percent >= 70) {
+        level = '📚 Средне-продвинутый (B2)';
+        detail = 'Хороший результат! Предлагаем курсы B2 для дальнейшего развития.';
+        icon = '🌟';
+    } else if (percent >= 50) {
+        level = '📖 Средний (B1)';
+        detail = 'Неплохо! Рекомендуем курсы B1 для укрепления знаний.';
+        icon = '💪';
+    } else if (percent >= 30) {
+        level = '📗 Начально-средний (A2)';
+        detail = 'Вы уже знаете основы! Курсы A2 помогут улучшить навыки.';
+        icon = '📚';
+    } else {
+        level = '📘 Начальный (A1)';
+        detail = 'Все начинается с первого шага! Приглашаем на курсы A1.';
+        icon = '🌱';
     }
     
-    document.getElementById('levelResult').textContent = level;
-    document.getElementById('resultDetail').textContent = `${detail} Правильных ответов: ${correctAnswers}/5`;
+    const html = `
+        <div class="test-result">
+            <div class="result-icon">${icon}</div>
+            <h3>🎉 Тест завершен!</h3>
+            <div class="result-level">${level}</div>
+            <p class="result-detail">${detail}</p>
+            <div class="result-stats">
+                <span class="stat-correct">✅ Правильно: ${correctCount}</span>
+                <span class="stat-wrong">❌ Неправильно: ${testQuestions.length - correctCount}</span>
+            </div>
+            <p class="result-percent">Точность: ${Math.round(percent)}%</p>
+            <button class="test-retry" onclick="resetTest()">🔄 Пройти заново</button>
+            <button class="test-consult-btn" onclick="document.getElementById('contacts').scrollIntoView({behavior: 'smooth'})">
+                📞 Записаться на курс
+            </button>
+        </div>
+    `;
+    
+    container.innerHTML = html;
 }
 
+// Сброс теста
 function resetTest() {
-    currentQuestion = 1;
-    correctAnswers = 0;
+    currentQuestionIndex = 0;
+    userAnswers = [];
     testStarted = false;
-    
-    document.querySelectorAll('.test-question').forEach(q => q.style.display = 'none');
-    document.getElementById('question1').style.display = 'block';
-    document.getElementById('testResult').style.display = 'none';
-    
-    document.querySelectorAll('.test-option').forEach(opt => {
-        opt.disabled = false;
-        opt.classList.remove('correct', 'wrong');
-    });
-    
-    // Обновляем прогресс для первого вопроса
-    const progress = document.querySelector('#question1 .question-progress');
-    if (progress) progress.textContent = '20%';
+    renderQuestion(0);
+    window.scrollTo({ top: document.getElementById('level-test').offsetTop - 100, behavior: 'smooth' });
 }
 
+// Запуск теста при загрузке
+document.addEventListener('DOMContentLoaded', function() {
+    // Инициализация теста
+    const testContainer = document.getElementById('testContent');
+    if (testContainer) {
+        renderQuestion(0);
+    }
+});
 // ===== ОТЗЫВЫ (показать больше) =====
 let reviewCount = 4;
 
