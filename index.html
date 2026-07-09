@@ -117,7 +117,204 @@
             </div>
         </div>
     </section>
+    <!-- ===== ТЕСТ НА УРОВЕНЬ ===== -->
+    <section class="level-test" id="level-test">
+        <h2>🎯 Определите свой уровень</h2>
+        <p class="test-subtitle">Пройдите короткий тест из 5 вопросов и узнайте свой уровень!</p>
+        <div class="test-container" id="testContainer">
+            <!-- Вопрос 1 -->
+            <div class="test-question" id="question1">
+                <div class="question-header">
+                    <span class="question-number">Вопрос 1 из 5</span>
+                    <span class="question-progress">20%</span>
+                </div>
+                <h3>Выберите правильное слово:</h3>
+                <p class="question-text">"I ____ to school every day."</p>
+                <div class="test-options">
+                    <button class="test-option" data-correct="true">go</button>
+                    <button class="test-option" data-correct="false">goes</button>
+                    <button class="test-option" data-correct="false">going</button>
+                </div>
+            </div>
 
+            <!-- Вопрос 2 -->
+            <div class="test-question" id="question2" style="display:none;">
+                <div class="question-header">
+                    <span class="question-number">Вопрос 2 из 5</span>
+                    <span class="question-progress">40%</span>
+                </div>
+                <h3>Как переводится "Hello"?</h3>
+                <div class="test-options">
+                    <button class="test-option" data-correct="true">Привет</button>
+                    <button class="test-option" data-correct="false">Пока</button>
+                    <button class="test-option" data-correct="false">Спасибо</button>
+                </div>
+            </div>
+
+            <!-- Вопрос 3 -->
+            <div class="test-question" id="question3" style="display:none;">
+                <div class="question-header">
+                    <span class="question-number">Вопрос 3 из 5</span>
+                    <span class="question-progress">60%</span>
+                </div>
+                <h3>Выберите правильный перевод:</h3>
+                <p class="question-text">"She is a teacher."</p>
+                <div class="test-options">
+                    <button class="test-option" data-correct="false">Он учитель</button>
+                    <button class="test-option" data-correct="true">Она учительница</button>
+                    <button class="test-option" data-correct="false">Они учителя</button>
+                </div>
+            </div>
+
+            <!-- Вопрос 4 -->
+            <div class="test-question" id="question4" style="display:none;">
+                <div class="question-header">
+                    <span class="question-number">Вопрос 4 из 5</span>
+                    <span class="question-progress">80%</span>
+                </div>
+                <h3>Что означает "Благодарю" по-английски?</h3>
+                <div class="test-options">
+                    <button class="test-option" data-correct="false">Please</button>
+                    <button class="test-option" data-correct="false">Sorry</button>
+                    <button class="test-option" data-correct="true">Thank you</button>
+                </div>
+            </div>
+
+            <!-- Вопрос 5 -->
+            <div class="test-question" id="question5" style="display:none;">
+                <div class="question-header">
+                    <span class="question-number">Вопрос 5 из 5</span>
+                    <span class="question-progress">100%</span>
+                </div>
+                <h3>Выберите правильный вариант:</h3>
+                <p class="question-text">"We ____ playing football now."</p>
+                <div class="test-options">
+                    <button class="test-option" data-correct="false">am</button>
+                    <button class="test-option" data-correct="true">are</button>
+                    <button class="test-option" data-correct="false">is</button>
+                </div>
+            </div>
+
+            <!-- Результат -->
+            <div class="test-result" id="testResult" style="display:none;">
+                <div class="result-icon">🎉</div>
+                <h3>Ваш уровень:</h3>
+                <div class="result-level" id="levelResult"></div>
+                <p class="result-detail" id="resultDetail"></p>
+                <button class="test-retry" onclick="resetTest()">Пройти заново</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== КАРТА СТУДЕНТОВ ===== -->
+    <section class="map-students" id="map-students">
+        <h2>🌍 Наши студенты по всему миру</h2>
+        <p class="map-subtitle">Присоединяйтесь к нашему международному сообществу!</p>
+        <div class="map-container">
+            <div class="country-card" data-count="12">
+                <span class="country-flag">🇺🇸</span>
+                <span class="country-name">США</span>
+                <span class="student-count">12 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 60%;"></div></div>
+            </div>
+            <div class="country-card" data-count="8">
+                <span class="country-flag">🇬🇧</span>
+                <span class="country-name">Великобритания</span>
+                <span class="student-count">8 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 40%;"></div></div>
+            </div>
+            <div class="country-card" data-count="15">
+                <span class="country-flag">🇨🇳</span>
+                <span class="country-name">Китай</span>
+                <span class="student-count">15 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 75%;"></div></div>
+            </div>
+            <div class="country-card" data-count="9">
+                <span class="country-flag">🇪🇸</span>
+                <span class="country-name">Испания</span>
+                <span class="student-count">9 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 45%;"></div></div>
+            </div>
+            <div class="country-card" data-count="20">
+                <span class="country-flag">🇷🇺</span>
+                <span class="country-name">Россия</span>
+                <span class="student-count">20 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 100%;"></div></div>
+            </div>
+            <div class="country-card" data-count="7">
+                <span class="country-flag">🇫🇷</span>
+                <span class="country-name">Франция</span>
+                <span class="student-count">7 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 35%;"></div></div>
+            </div>
+            <div class="country-card total-students">
+                <span class="country-flag">🌟</span>
+                <span class="country-name">Всего студентов</span>
+                <span class="student-count" id="totalStudents">71</span>
+                <div class="country-bar"><div class="country-fill" style="width: 100%; background: linear-gradient(90deg, #ffd700, #ff6b6b);"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ОТЗЫВЫ СТУДЕНТОВ ===== -->
+    <section class="reviews" id="reviews">
+        <h2>💬 Отзывы наших студентов</h2>
+        <p class="reviews-subtitle">Реальные истории успеха наших учеников</p>
+        <div class="reviews-container" id="reviewsContainer">
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">👩</div>
+                    <div class="review-user">
+                        <h4>Мария Иванова</h4>
+                        <span class="review-course">🇬🇧 Английский A2</span>
+                    </div>
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p class="review-text">"Занимаюсь уже 3 месяца. Прогресс просто невероятный! Преподаватели очень внимательные и всегда готовы помочь. Спасибо за вашу работу!"</p>
+                <span class="review-date">15 июня 2026</span>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">👨</div>
+                    <div class="review-user">
+                        <h4>Алексей Смирнов</h4>
+                        <span class="review-course">🇨🇳 Китайский HSK 1</span>
+                    </div>
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p class="review-text">"Всегда мечтал выучить китайский. Благодаря Language School я наконец-то начал понимать и говорить! Отличная методика и дружелюбная атмосфера."</p>
+                <span class="review-date">10 июня 2026</span>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">👩</div>
+                    <div class="review-user">
+                        <h4>Елена Петрова</h4>
+                        <span class="review-course">🇪🇸 Испанский A1</span>
+                    </div>
+                    <div class="review-stars">⭐⭐⭐⭐</div>
+                </div>
+                <p class="review-text">"Очень довольна обучением! Испанский теперь не кажется таким сложным. Уроки проходят интересно и продуктивно. Рекомендую всем!"</p>
+                <span class="review-date">5 июня 2026</span>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">👨</div>
+                    <div class="review-user">
+                        <h4>Дмитрий Козлов</h4>
+                        <span class="review-course">🇬🇧 Английский B1</span>
+                    </div>
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p class="review-text">"Подготовился к экзамену IELTS всего за 4 месяца! Получил 7.5. Спасибо большое команде Language School за профессионализм и поддержку!"</p>
+                <span class="review-date">1 июня 2026</span>
+            </div>
+        </div>
+        <button class="reviews-showmore" onclick="showMoreReviews()">Показать еще отзывы</button>
+    </section>
     <!-- Форма записи -->
     <section id="contacts" class="form-section">
         <h2>Записаться на курс</h2>
