@@ -117,91 +117,13 @@
             </div>
         </div>
     </section>
-    <!-- ===== ТЕСТ НА УРОВЕНЬ ===== -->
+        <!-- ===== ТЕСТ НА УРОВЕНЬ ===== -->
     <section class="level-test" id="level-test">
         <h2>🎯 Определите свой уровень</h2>
-        <p class="test-subtitle">Пройдите короткий тест из 5 вопросов и узнайте свой уровень!</p>
+        <p class="test-subtitle">Тест поможет определить ваш примерный уровень, чтобы подобрать подходящий для вас курс</p>
         <div class="test-container" id="testContainer">
-            <!-- Вопрос 1 -->
-            <div class="test-question" id="question1">
-                <div class="question-header">
-                    <span class="question-number">Вопрос 1 из 5</span>
-                    <span class="question-progress">20%</span>
-                </div>
-                <h3>Выберите правильное слово:</h3>
-                <p class="question-text">"I ____ to school every day."</p>
-                <div class="test-options">
-                    <button class="test-option" data-correct="true">go</button>
-                    <button class="test-option" data-correct="false">goes</button>
-                    <button class="test-option" data-correct="false">going</button>
-                </div>
-            </div>
-
-            <!-- Вопрос 2 -->
-            <div class="test-question" id="question2" style="display:none;">
-                <div class="question-header">
-                    <span class="question-number">Вопрос 2 из 5</span>
-                    <span class="question-progress">40%</span>
-                </div>
-                <h3>Как переводится "Hello"?</h3>
-                <div class="test-options">
-                    <button class="test-option" data-correct="true">Привет</button>
-                    <button class="test-option" data-correct="false">Пока</button>
-                    <button class="test-option" data-correct="false">Спасибо</button>
-                </div>
-            </div>
-
-            <!-- Вопрос 3 -->
-            <div class="test-question" id="question3" style="display:none;">
-                <div class="question-header">
-                    <span class="question-number">Вопрос 3 из 5</span>
-                    <span class="question-progress">60%</span>
-                </div>
-                <h3>Выберите правильный перевод:</h3>
-                <p class="question-text">"She is a teacher."</p>
-                <div class="test-options">
-                    <button class="test-option" data-correct="false">Он учитель</button>
-                    <button class="test-option" data-correct="true">Она учительница</button>
-                    <button class="test-option" data-correct="false">Они учителя</button>
-                </div>
-            </div>
-
-            <!-- Вопрос 4 -->
-            <div class="test-question" id="question4" style="display:none;">
-                <div class="question-header">
-                    <span class="question-number">Вопрос 4 из 5</span>
-                    <span class="question-progress">80%</span>
-                </div>
-                <h3>Что означает "Благодарю" по-английски?</h3>
-                <div class="test-options">
-                    <button class="test-option" data-correct="false">Please</button>
-                    <button class="test-option" data-correct="false">Sorry</button>
-                    <button class="test-option" data-correct="true">Thank you</button>
-                </div>
-            </div>
-
-            <!-- Вопрос 5 -->
-            <div class="test-question" id="question5" style="display:none;">
-                <div class="question-header">
-                    <span class="question-number">Вопрос 5 из 5</span>
-                    <span class="question-progress">100%</span>
-                </div>
-                <h3>Выберите правильный вариант:</h3>
-                <p class="question-text">"We ____ playing football now."</p>
-                <div class="test-options">
-                    <button class="test-option" data-correct="false">am</button>
-                    <button class="test-option" data-correct="true">are</button>
-                    <button class="test-option" data-correct="false">is</button>
-                </div>
-            </div>
-
-            <!-- Результат -->
-            <div class="test-result" id="testResult" style="display:none;">
-                <div class="result-icon">🎉</div>
-                <h3>Ваш уровень:</h3>
-                <div class="result-level" id="levelResult"></div>
-                <p class="result-detail" id="resultDetail"></p>
-                <button class="test-retry" onclick="resetTest()">Пройти заново</button>
+            <div id="testContent">
+                <!-- Вопросы будут генерироваться через JavaScript -->
             </div>
         </div>
     </section>
