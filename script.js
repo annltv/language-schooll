@@ -109,3 +109,184 @@ function startCountdown() {
     }, 1000);
 }
 startCountdown();
+// ===== ТЕСТ НА УРОВЕНЬ =====
+let currentQuestion = 1;
+let correctAnswers = 0;
+let testStarted = false;
+
+// Обработка ответов на тест
+document.querySelectorAll('.test-option').forEach(button => {
+    button.addEventListener('click', function() {
+        if (this.disabled || testStarted) return;
+        
+        const isCorrect = this.dataset.correct === 'true';
+        const allOptions = this.parentElement.querySelectorAll('.test-option');
+        
+        // Блокируем все кнопки в текущем вопросе
+        allOptions.forEach(opt => {
+            opt.disabled = true;
+            if (opt.dataset.correct === 'true') {
+                opt.classList.add('correct');
+            } else if (opt === this && !isCorrect) {
+                opt.classList.add('wrong');
+            }
+        });
+        
+        if (isCorrect) correctAnswers++;
+        
+        // Переход к следующему вопросу
+        setTimeout(() => {
+            const current = document.getElementById(`question${currentQuestion}`);
+            current.style.display = 'none';
+            currentQuestion++;
+            
+            if (currentQuestion <= 5) {
+                document.getElementById(`question${currentQuestion}`).style.display = 'block';
+                // Обновляем прогресс
+                const progress = document.querySelector(`#question${currentQuestion} .question-progress`);
+                if (progress) {
+                    progress.textContent = `${(currentQuestion - 1) * 20}%`;
+                }
+            } else {
+                showTestResult();
+            }
+        }, 800);
+    });
+});
+
+function showTestResult() {
+    const resultDiv = document.getElementById('testResult');
+    resultDiv.style.display = 'block';
+    
+    let level, detail;
+    switch(correctAnswers) {
+        case 5:
+            level = '🌟 Продвинутый (C1-C2)';
+            detail = 'Вы отлично владеете языком! Рекомендуем курсы для продвинутых.';
+            break;
+        case 4:
+            level = '📚 Средне-продвинутый (B2)';
+            detail = 'Хороший результат! Предлагаем курсы B2 для дальнейшего развития.';
+            break;
+        case 3:
+            level = '📖 Средний (B1)';
+            detail = 'Неплохо! Рекомендуем курсы B1 для укрепления знаний.';
+            break;
+        case 2:
+            level = '📗 Начально-средний (A2)';
+            detail = 'Вы уже знаете основы! Курсы A2 помогут улучшить навыки.';
+            break;
+        default:
+            level = '📘 Начальный (A1)';
+            detail = 'Все начинается с первого шага! Приглашаем на курсы A1.';
+    }
+    
+    document.getElementById('levelResult').textContent = level;
+    document.getElementById('resultDetail').textContent = `${detail} Правильных ответов: ${correctAnswers}/5`;
+}
+
+function resetTest() {
+    currentQuestion = 1;
+    correctAnswers = 0;
+    testStarted = false;
+    
+    document.querySelectorAll('.test-question').forEach(q => q.style.display = 'none');
+    document.getElementById('question1').style.display = 'block';
+    document.getElementById('testResult').style.display = 'none';
+    
+    document.querySelectorAll('.test-option').forEach(opt => {
+        opt.disabled = false;
+        opt.classList.remove('correct', 'wrong');
+    });
+    
+    // Обновляем прогресс для первого вопроса
+    const progress = document.querySelector('#question1 .question-progress');
+    if (progress) progress.textContent = '20%';
+}
+
+// ===== ОТЗЫВЫ (показать больше) =====
+let reviewCount = 4;
+
+function showMoreReviews() {
+    const container = document.getElementById('reviewsContainer');
+    
+    // Дополнительные отзывы
+    const moreReviews = [
+        {
+            avatar: '👨',
+            name: 'Павел Новиков',
+            course: '🇬🇧 Английский B2',
+            stars: '⭐⭐⭐⭐⭐',
+            text: 'Отличная школа! Преподаватели профессионалы, материалы актуальные. Уже через месяц почувствовал прогресс в разговорной речи.',
+            date: '25 мая 2026'
+        },
+        {
+            avatar: '👩',
+            name: 'Ольга Соколова',
+            course: '🇨🇳 Китайский HSK 2',
+            stars: '⭐⭐⭐⭐⭐',
+            text: 'Китайский язык стал для меня открытием! Благодаря преподавателям я не только выучила иероглифы, но и полюбила китайскую культуру.',
+            date: '20 мая 2026'
+        },
+        {
+            avatar: '👨',
+            name: 'Игорь Морозов',
+            course: '🇪🇸 Испанский A2',
+            stars: '⭐⭐⭐⭐',
+            text: 'Испанский теперь мой любимый язык! Уроки проходят весело и интересно. Особенно нравится разговорная практика с носителями.',
+            date: '15 мая 2026'
+        }
+    ];
+    
+    // Показываем по 2 отзыва за раз
+    const start = reviewCount - 4;
+    const end = Math.min(reviewCount + 2, 4 + moreReviews.length);
+    
+    for (let i = start; i < end && i < moreReviews.length + 4; i++) {
+        if (i >= 4) {
+            const review = moreReviews[i - 4];
+            const card = document.createElement('div');
+            card.className = 'review-card';
+            card.style.animation = 'fadeIn 0.5s ease';
+            card.innerHTML = `
+                <div class="review-header">
+                    <div class="review-avatar">${review.avatar}</div>
+                    <div class="review-user">
+                        <h4>${review.name}</h4>
+                        <span class="review-course">${review.course}</span>
+                    </div>
+                    <div class="review-stars">${review.stars}</div>
+                </div>
+                <p class="review-text">"${review.text}"</p>
+                <span class="review-date">${review.date}</span>
+            `;
+            container.appendChild(card);
+        }
+    }
+    
+    reviewCount += 2;
+    
+    // Скрываем кнопку если больше нет отзывов
+    if (reviewCount >= 4 + moreReviews.length) {
+        document.querySelector('.reviews-showmore').style.display = 'none';
+    }
+}
+
+// ===== АНИМАЦИЯ ДЛЯ КАРТЫ СТУДЕНТОВ =====
+const mapSection = document.querySelector('.map-students');
+let mapAnimated = false;
+
+const mapObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !mapAnimated) {
+        mapAnimated = true;
+        document.querySelectorAll('.country-fill').forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0%';
+            setTimeout(() => {
+                bar.style.width = width;
+            }, 300);
+        });
+    }
+});
+
+mapObserver.observe(mapSection);
