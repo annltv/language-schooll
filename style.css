@@ -562,3 +562,353 @@ body.dark-theme select {
         font-size: 16px;
     }
 }
+/* ===== ТЕСТ НА УРОВЕНЬ ===== */
+.level-test {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+    border-radius: 30px;
+    margin: 40px auto;
+}
+
+.test-subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.test-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.test-question {
+    animation: fadeIn 0.5s ease;
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.question-progress {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.test-question h3 {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.question-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.test-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.test-option {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.test-option:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+}
+
+.test-option.correct {
+    border-color: #4ade80;
+    background: rgba(74, 222, 128, 0.2);
+}
+
+.test-option.wrong {
+    border-color: #f87171;
+    background: rgba(248, 113, 113, 0.2);
+}
+
+.test-option:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Результат теста */
+.test-result {
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+.result-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.result-level {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffd700;
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.result-detail {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.test-retry {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 30px;
+    border-radius: 25px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.test-retry:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== КАРТА СТУДЕНТОВ ===== */
+.map-students {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+    border-radius: 30px;
+    margin: 40px auto;
+}
+
+.map-subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.map-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.country-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s;
+    color: white;
+}
+
+.country-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.country-flag {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.country-name {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.student-count {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.country-bar {
+    margin-top: 10px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.country-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4a90e2, #764ba2);
+    border-radius: 10px;
+    transition: width 1.5s ease;
+}
+
+.total-students {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 107, 107, 0.15));
+    border-color: rgba(255, 215, 0, 0.2);
+}
+
+.total-students .student-count {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+/* ===== ОТЗЫВЫ ===== */
+.reviews {
+    padding: 80px 20px;
+    border-radius: 30px;
+    margin: 40px auto;
+}
+
+.reviews-subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.reviews-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.review-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(15px);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s;
+    color: white;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.review-avatar {
+    font-size: 40px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.review-user {
+    flex: 1;
+}
+
+.review-user h4 {
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.review-course {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.review-stars {
+    color: #ffd700;
+    font-size: 14px;
+}
+
+.review-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 12px;
+}
+
+.review-date {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.reviews-showmore {
+    display: block;
+    margin: 30px auto 0;
+    padding: 14px 40px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.reviews-showmore:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: scale(1.05);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .reviews-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .map-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .test-container {
+        padding: 20px;
+    }
+    
+    .result-level {
+        font-size: 24px;
+    }
+}
