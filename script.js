@@ -1,440 +1,262 @@
-// Обработка формы с отправкой
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contactForm');
-    const toast = document.getElementById('toast');
+<!DOCTYPE html>
+<html lang="ru">
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        // Проверка заполнения
-        const name = this.querySelector('input[type="text"]').value.trim();
-        const phone = this.querySelector('input[type="tel"]').value.trim();
-        const language = this.querySelector('select').value;
-
-        if (!name || !phone || !language) {
-            showToast('Пожалуйста, заполните все поля!', 'error');
-            return;
-        }
-
-        // Имитация отправки на сервер
-        showToast('✓ Заявка отправлена! Мы свяжемся с вами скоро.', 'success');
-
-        // Очистка формы
-        this.reset();
-
-        // Отправка данных (здесь можно добавить реальный запрос)
-        console.log('Данные формы:', {
-            name: name,
-            phone: phone,
-            language: language
-        });
-    });
-
-    // Функция показа уведомления
-    function showToast(message, type = 'success') {
-        toast.textContent = message;
-        toast.style.background = type === 'error' 
-            ? 'rgba(220, 53, 69, 0.9)' 
-            : 'rgba(0, 0, 0, 0.8)';
-        toast.classList.add('show');
-
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3000);
-    }
-
-    // Плавная прокрутка для всех ссылок
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
-});
-// Анимация появления при скролле
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-        }
-    });
-}, {
-    threshold: 0.1
-});
-
-document.querySelectorAll('.course, .teacher-card').forEach(el => {
-    observer.observe(el);
-});
-// Калькулятор стоимости
-const languageSelect = document.getElementById('languageSelect');
-const levelSelect = document.getElementById('levelSelect');
-const priceDisplay = document.getElementById('priceDisplay');
-
-function updatePrice() {
-    const basePrice = parseFloat(languageSelect.value);
-    const level = parseFloat(levelSelect.value);
-    const total = Math.round(basePrice * level);
-    priceDisplay.textContent = total;
-}
-
-languageSelect.addEventListener('change', updatePrice);
-levelSelect.addEventListener('change', updatePrice);
-// Переключение темы
-const themeToggle = document.getElementById('themeToggle');
-
-themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-theme');
-    themeToggle.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
-});
-// Обратный отсчет (до 1 сентября 2026)
-function startCountdown() {
-    const targetDate = new Date('September 1, 2026 00:00:00').getTime();
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language School</title>
     
-    setInterval(() => {
-        const now = new Date().getTime();
-        const diff = targetDate - now;
-        
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        
-        document.getElementById('days').textContent = String(days).padStart(2, '0');
-        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-    }, 1000);
-}
-startCountdown();
-// ===== ТЕСТ НА УРОВЕНЬ (15 вопросов) =====
-const testQuestions = [
-    {
-        question: 'Выберите правильное слово: "I ____ to school every day."',
-        options: ['go', 'goes', 'going', 'went'],
-        correct: 0
-    },
-    {
-        question: 'Как переводится "Hello"?',
-        options: ['Привет', 'Пока', 'Спасибо', 'Доброе утро'],
-        correct: 0
-    },
-    {
-        question: 'Выберите правильный перевод: "She is a teacher."',
-        options: ['Он учитель', 'Она учительница', 'Они учителя', 'Мы учителя'],
-        correct: 1
-    },
-    {
-        question: 'Что означает "Благодарю" по-английски?',
-        options: ['Please', 'Sorry', 'Thank you', 'Goodbye'],
-        correct: 2
-    },
-    {
-        question: 'Выберите правильный вариант: "We ____ playing football now."',
-        options: ['am', 'is', 'are', 'be'],
-        correct: 2
-    },
-    {
-        question: 'Как сказать "Я люблю музыку" по-английски?',
-        options: ['I love music', 'I like music', 'I enjoy music', 'I want music'],
-        correct: 0
-    },
-    {
-        question: 'Что означает слово "Beautiful"?',
-        options: ['Уродливый', 'Красивый', 'Большой', 'Маленький'],
-        correct: 1
-    },
-    {
-        question: 'Выберите правильный артикль: "____ apple"',
-        options: ['a', 'an', 'the', 'none'],
-        correct: 1
-    },
-    {
-        question: 'Как переводится "Thank you very much"?',
-        options: ['Пожалуйста', 'Большое спасибо', 'Извините', 'Добрый день'],
-        correct: 1
-    },
-    {
-        question: 'Выберите правильную форму: "They ____ to the park yesterday."',
-        options: ['go', 'goes', 'went', 'going'],
-        correct: 2
-    },
-    {
-        question: 'Что означает "До свидания" по-английски?',
-        options: ['Hello', 'Goodbye', 'Sorry', 'Please'],
-        correct: 1
-    },
-    {
-        question: 'Как спросить "Как дела?" по-английски?',
-        options: ['How are you?', 'What is your name?', 'Where are you?', 'How old are you?'],
-        correct: 0
-    },
-    {
-        question: 'Выберите правильный вариант: "She ____ a student."',
-        options: ['am', 'is', 'are', 'be'],
-        correct: 1
-    },
-    {
-        question: 'Что означает слово "Friend"?',
-        options: ['Враг', 'Друг', 'Семья', 'Коллега'],
-        correct: 1
-    },
-    {
-        question: 'Как переводится "I am happy"?',
-        options: ['Я грустный', 'Я счастливый', 'Я устал', 'Я голоден'],
-        correct: 1
-    }
-];
+    <!-- ===== FAVICON ===== -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
 
-let currentQuestionIndex = 0;
-let userAnswers = [];
-let testStarted = false;
+<body>
+    <!-- ===== НАВИГАЦИЯ ===== -->
+    <nav>
+        <div class="logo">🌍 Language School</div>
+        <ul>
+            <li><a href="#hero">Главная</a></li>
+            <li><a href="#courses">Курсы</a></li>
+            <li><a href="#teachers">Преподаватели</a></li>
+            <li><a href="#level-test">Тест</a></li>
+            <li><a href="#map-students">Студенты</a></li>
+            <li><a href="#reviews">Отзывы</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+        </ul>
+        <button id="themeToggle" class="theme-btn">🌙</button>
+    </nav>
 
-// Функция для отображения вопроса
-function renderQuestion(index) {
-    const container = document.getElementById('testContent');
-    const question = testQuestions[index];
-    const total = testQuestions.length;
-    const progress = Math.round(((index + 1) / total) * 100);
-    
-    let html = `
-        <div class="test-question" id="question${index + 1}">
-            <div class="question-header">
-                <span class="question-number">Вопрос ${index + 1} из ${total}</span>
-                <span class="question-progress">${progress}%</span>
-            </div>
-            <div class="progress-bar-full">
-                <div class="progress-bar-fill" style="width: ${progress}%;"></div>
-            </div>
-            <h3>${question.question}</h3>
-            <div class="test-options">
-    `;
-    
-    question.options.forEach((option, optIndex) => {
-        const letter = String.fromCharCode(65 + optIndex); // A, B, C, D
-        html += `
-            <button class="test-option" data-question="${index}" data-option="${optIndex}" data-correct="${optIndex === question.correct ? 'true' : 'false'}">
-                <span class="option-letter">${letter}.</span> ${option}
-            </button>
-        `;
-    });
-    
-    html += `
-            </div>
-        </div>
-    `;
-    
-    container.innerHTML = html;
-    
-    // Добавляем обработчики на кнопки
-    document.querySelectorAll('.test-option').forEach(btn => {
-        btn.addEventListener('click', function() {
-            handleAnswer(this);
-        });
-    });
-    
-    // Обновляем прогресс
-    updateProgress(index);
-}
-
-// Обработка ответа
-function handleAnswer(button) {
-    if (button.disabled) return;
-    
-    const questionIndex = parseInt(button.dataset.question);
-    const selectedOption = parseInt(button.dataset.option);
-    const isCorrect = button.dataset.correct === 'true';
-    
-    // Сохраняем ответ
-    userAnswers[questionIndex] = selectedOption;
-    
-    // Блокируем все кнопки в текущем вопросе
-    const allOptions = button.parentElement.querySelectorAll('.test-option');
-    allOptions.forEach(opt => {
-        opt.disabled = true;
-        if (opt.dataset.correct === 'true') {
-            opt.classList.add('correct');
-        } else if (opt === button && !isCorrect) {
-            opt.classList.add('wrong');
-        }
-    });
-    
-    // Переход к следующему вопросу или показ результата
-    setTimeout(() => {
-        const nextIndex = questionIndex + 1;
-        if (nextIndex < testQuestions.length) {
-            renderQuestion(nextIndex);
-        } else {
-            showResult();
-        }
-    }, 800);
-}
-
-// Обновление прогресса
-function updateProgress(index) {
-    const total = testQuestions.length;
-    const progress = Math.round(((index + 1) / total) * 100);
-    const progressFill = document.querySelector('.progress-bar-fill');
-    if (progressFill) {
-        progressFill.style.width = progress + '%';
-    }
-}
-
-// Показать результат
-function showResult() {
-    const container = document.getElementById('testContent');
-    const correctCount = userAnswers.reduce((count, answer, index) => {
-        return count + (answer === testQuestions[index].correct ? 1 : 0);
-    }, 0);
-    
-    let level, detail, icon;
-    const percent = (correctCount / testQuestions.length) * 100;
-    
-    if (percent >= 90) {
-        level = '🌟 Продвинутый (C1-C2)';
-        detail = 'Вы отлично владеете языком! Рекомендуем курсы для продвинутых.';
-        icon = '🏆';
-    } else if (percent >= 70) {
-        level = '📚 Средне-продвинутый (B2)';
-        detail = 'Хороший результат! Предлагаем курсы B2 для дальнейшего развития.';
-        icon = '🌟';
-    } else if (percent >= 50) {
-        level = '📖 Средний (B1)';
-        detail = 'Неплохо! Рекомендуем курсы B1 для укрепления знаний.';
-        icon = '💪';
-    } else if (percent >= 30) {
-        level = '📗 Начально-средний (A2)';
-        detail = 'Вы уже знаете основы! Курсы A2 помогут улучшить навыки.';
-        icon = '📚';
-    } else {
-        level = '📘 Начальный (A1)';
-        detail = 'Все начинается с первого шага! Приглашаем на курсы A1.';
-        icon = '🌱';
-    }
-    
-    const html = `
-        <div class="test-result">
-            <div class="result-icon">${icon}</div>
-            <h3>🎉 Тест завершен!</h3>
-            <div class="result-level">${level}</div>
-            <p class="result-detail">${detail}</p>
-            <div class="result-stats">
-                <span class="stat-correct">✅ Правильно: ${correctCount}</span>
-                <span class="stat-wrong">❌ Неправильно: ${testQuestions.length - correctCount}</span>
-            </div>
-            <p class="result-percent">Точность: ${Math.round(percent)}%</p>
-            <button class="test-retry" onclick="resetTest()">🔄 Пройти заново</button>
-            <button class="test-consult-btn" onclick="document.getElementById('contacts').scrollIntoView({behavior: 'smooth'})">
-                📞 Записаться на курс
+    <!-- ===== ГЕРОЙ-СЕКЦИЯ ===== -->
+    <div class="hero" id="hero">
+        <div class="hero-overlay">
+            <h1>Language School</h1>
+            <p>Изучайте языки легко и с удовольствием</p>
+            <button onclick="document.getElementById('contacts').scrollIntoView({behavior: 'smooth'})">
+                Записаться на курс
             </button>
         </div>
-    `;
-    
-    container.innerHTML = html;
-}
+    </div>
 
-// Сброс теста
-function resetTest() {
-    currentQuestionIndex = 0;
-    userAnswers = [];
-    testStarted = false;
-    renderQuestion(0);
-    window.scrollTo({ top: document.getElementById('level-test').offsetTop - 100, behavior: 'smooth' });
-}
+    <!-- ===== ОБРАТНЫЙ ОТСЧЕТ ===== -->
+    <section class="countdown">
+        <h2>🎯 Ближайший старт курсов</h2>
+        <div class="countdown-container">
+            <div class="countdown-item">
+                <span id="days">00</span>
+                <p>Дней</p>
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span>
+                <p>Часов</p>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span>
+                <p>Минут</p>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span>
+                <p>Секунд</p>
+            </div>
+        </div>
+    </section>
 
-// Запуск теста при загрузке
-document.addEventListener('DOMContentLoaded', function() {
-    // Инициализация теста
-    const testContainer = document.getElementById('testContent');
-    if (testContainer) {
-        renderQuestion(0);
-    }
-});
-// ===== ОТЗЫВЫ (показать больше) =====
-let reviewCount = 4;
+    <!-- ===== КУРСЫ ===== -->
+    <section class="courses" id="courses">
+        <h2>Наши курсы</h2>
+        <div class="courses-container">
+            <div class="course">
+                <h3>🇬🇧 Английский</h3>
+                <p>Для начинающих и продвинутых</p>
+                <span class="course-level">Уровни: A1-C2</span>
+            </div>
+            <div class="course">
+                <h3>🇨🇳 Китайский</h3>
+                <p>С нуля до уверенного общения</p>
+                <span class="course-level">Уровни: HSK 1-4</span>
+            </div>
+            <div class="course">
+                <h3>🇪🇸 Испанский</h3>
+                <p>Разговорная практика и грамматика</p>
+                <span class="course-level">Уровни: A1-B2</span>
+            </div>
+        </div>
+    </section>
 
-function showMoreReviews() {
-    const container = document.getElementById('reviewsContainer');
-    
-    // Дополнительные отзывы
-    const moreReviews = [
-        {
-            avatar: '👨',
-            name: 'Павел Новиков',
-            course: '🇬🇧 Английский B2',
-            stars: '⭐⭐⭐⭐⭐',
-            text: 'Отличная школа! Преподаватели профессионалы, материалы актуальные. Уже через месяц почувствовал прогресс в разговорной речи.',
-            date: '25 мая 2026'
-        },
-        {
-            avatar: '👩',
-            name: 'Ольга Соколова',
-            course: '🇨🇳 Китайский HSK 2',
-            stars: '⭐⭐⭐⭐⭐',
-            text: 'Китайский язык стал для меня открытием! Благодаря преподавателям я не только выучила иероглифы, но и полюбила китайскую культуру.',
-            date: '20 мая 2026'
-        },
-        {
-            avatar: '👨',
-            name: 'Игорь Морозов',
-            course: '🇪🇸 Испанский A2',
-            stars: '⭐⭐⭐⭐',
-            text: 'Испанский теперь мой любимый язык! Уроки проходят весело и интересно. Особенно нравится разговорная практика с носителями.',
-            date: '15 мая 2026'
-        }
-    ];
-    
-    // Показываем по 2 отзыва за раз
-    const start = reviewCount - 4;
-    const end = Math.min(reviewCount + 2, 4 + moreReviews.length);
-    
-    for (let i = start; i < end && i < moreReviews.length + 4; i++) {
-        if (i >= 4) {
-            const review = moreReviews[i - 4];
-            const card = document.createElement('div');
-            card.className = 'review-card';
-            card.style.animation = 'fadeIn 0.5s ease';
-            card.innerHTML = `
+    <!-- ===== ТЕСТ НА УРОВЕНЬ ===== -->
+    <section class="level-test" id="level-test">
+        <h2>🎯 Определите свой уровень</h2>
+        <p class="test-subtitle">Тест поможет определить ваш примерный уровень, чтобы подобрать подходящий для вас курс</p>
+        <div class="test-container" id="testContainer">
+            <div id="testContent">
+                <!-- Вопросы генерируются через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== КАРТА СТУДЕНТОВ ===== -->
+    <section class="map-students" id="map-students">
+        <h2>🌍 Наши студенты по всему миру</h2>
+        <p class="map-subtitle">Присоединяйтесь к нашему международному сообществу!</p>
+        <div class="map-container">
+            <div class="country-card">
+                <span class="country-flag">🇺🇸</span>
+                <span class="country-name">США</span>
+                <span class="student-count">12 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 60%;"></div></div>
+            </div>
+            <div class="country-card">
+                <span class="country-flag">🇬🇧</span>
+                <span class="country-name">Великобритания</span>
+                <span class="student-count">8 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 40%;"></div></div>
+            </div>
+            <div class="country-card">
+                <span class="country-flag">🇨🇳</span>
+                <span class="country-name">Китай</span>
+                <span class="student-count">15 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 75%;"></div></div>
+            </div>
+            <div class="country-card">
+                <span class="country-flag">🇪🇸</span>
+                <span class="country-name">Испания</span>
+                <span class="student-count">9 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 45%;"></div></div>
+            </div>
+            <div class="country-card">
+                <span class="country-flag">🇷🇺</span>
+                <span class="country-name">Россия</span>
+                <span class="student-count">20 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 100%;"></div></div>
+            </div>
+            <div class="country-card">
+                <span class="country-flag">🇫🇷</span>
+                <span class="country-name">Франция</span>
+                <span class="student-count">7 студентов</span>
+                <div class="country-bar"><div class="country-fill" style="width: 35%;"></div></div>
+            </div>
+            <div class="country-card total-students">
+                <span class="country-flag">🌟</span>
+                <span class="country-name">Всего студентов</span>
+                <span class="student-count" id="totalStudents">71</span>
+                <div class="country-bar"><div class="country-fill" style="width: 100%; background: linear-gradient(90deg, #ffd700, #ff6b6b);"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПРЕПОДАВАТЕЛИ ===== -->
+    <section id="teachers" class="teachers">
+        <h2>Наши преподаватели</h2>
+        <div class="teachers-container">
+            <div class="teacher-card">
+                <div class="teacher-avatar">👩‍🏫</div>
+                <h3>Анна Иванова</h3>
+                <p>Английский язык</p>
+                <span class="teacher-experience">Опыт: 8 лет</span>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar">👨‍🏫</div>
+                <h3>Михаил Чжан</h3>
+                <p>Китайский язык</p>
+                <span class="teacher-experience">Опыт: 6 лет</span>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar">👩‍🏫</div>
+                <h3>Мария Гарсия</h3>
+                <p>Испанский язык</p>
+                <span class="teacher-experience">Опыт: 5 лет</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ОТЗЫВЫ ===== -->
+    <section class="reviews" id="reviews">
+        <h2>💬 Отзывы наших студентов</h2>
+        <p class="reviews-subtitle">Реальные истории успеха наших учеников</p>
+        <div class="reviews-container" id="reviewsContainer">
+            <div class="review-card">
                 <div class="review-header">
-                    <div class="review-avatar">${review.avatar}</div>
+                    <div class="review-avatar">👩</div>
                     <div class="review-user">
-                        <h4>${review.name}</h4>
-                        <span class="review-course">${review.course}</span>
+                        <h4>Мария Иванова</h4>
+                        <span class="review-course">🇬🇧 Английский A2</span>
                     </div>
-                    <div class="review-stars">${review.stars}</div>
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
                 </div>
-                <p class="review-text">"${review.text}"</p>
-                <span class="review-date">${review.date}</span>
-            `;
-            container.appendChild(card);
-        }
-    }
-    
-    reviewCount += 2;
-    
-    // Скрываем кнопку если больше нет отзывов
-    if (reviewCount >= 4 + moreReviews.length) {
-        document.querySelector('.reviews-showmore').style.display = 'none';
-    }
-}
+                <p class="review-text">"Занимаюсь уже 3 месяца. Прогресс просто невероятный! Преподаватели очень внимательные и всегда готовы помочь. Спасибо за вашу работу!"</p>
+                <span class="review-date">15 июня 2026</span>
+            </div>
 
-// ===== АНИМАЦИЯ ДЛЯ КАРТЫ СТУДЕНТОВ =====
-const mapSection = document.querySelector('.map-students');
-let mapAnimated = false;
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">👨</div>
+                    <div class="review-user">
+                        <h4>Алексей Смирнов</h4>
+                        <span class="review-course">🇨🇳 Китайский HSK 1</span>
+                    </div>
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p class="review-text">"Всегда мечтал выучить китайский. Благодаря Language School я наконец-то начал понимать и говорить! Отличная методика и дружелюбная атмосфера."</p>
+                <span class="review-date">10 июня 2026</span>
+            </div>
 
-const mapObserver = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting && !mapAnimated) {
-        mapAnimated = true;
-        document.querySelectorAll('.country-fill').forEach(bar => {
-            const width = bar.style.width;
-            bar.style.width = '0%';
-            setTimeout(() => {
-                bar.style.width = width;
-            }, 300);
-        });
-    }
-});
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">👩</div>
+                    <div class="review-user">
+                        <h4>Елена Петрова</h4>
+                        <span class="review-course">🇪🇸 Испанский A1</span>
+                    </div>
+                    <div class="review-stars">⭐⭐⭐⭐</div>
+                </div>
+                <p class="review-text">"Очень довольна обучением! Испанский теперь не кажется таким сложным. Уроки проходят интересно и продуктивно. Рекомендую всем!"</p>
+                <span class="review-date">5 июня 2026</span>
+            </div>
 
-mapObserver.observe(mapSection);
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">👨</div>
+                    <div class="review-user">
+                        <h4>Дмитрий Козлов</h4>
+                        <span class="review-course">🇬🇧 Английский B1</span>
+                    </div>
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p class="review-text">"Подготовился к экзамену IELTS всего за 4 месяца! Получил 7.5. Спасибо большое команде Language School за профессионализм и поддержку!"</p>
+                <span class="review-date">1 июня 2026</span>
+            </div>
+        </div>
+        <button class="reviews-showmore" id="showMoreBtn">Показать еще отзывы</button>
+    </section>
+
+    <!-- ===== ФОРМА ЗАПИСИ ===== -->
+    <section id="contacts" class="form-section">
+        <h2>Записаться на курс</h2>
+        <form id="contactForm">
+            <input type="text" placeholder="Ваше имя" required>
+            <input type="tel" placeholder="Телефон" required>
+            <select required>
+                <option value="">Выберите язык</option>
+                <option>Английский</option>
+                <option>Китайский</option>
+                <option>Испанский</option>
+            </select>
+            <button type="submit">Отправить заявку</button>
+        </form>
+    </section>
+
+    <!-- ===== TOAST УВЕДОМЛЕНИЕ ===== -->
+    <div id="toast" class="toast">
+        ✓ Заявка отправлена!
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
